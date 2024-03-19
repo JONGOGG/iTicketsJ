@@ -1,0 +1,27 @@
+{
+  "name": "iticket",
+  "version": "1.0.0",
+  "description": "Sistema de reporte de incidencias para soporte técnico dirigido a la área de informática",
+  "main": "index.js",
+  "scripts": {
+    "dev":"nodemon app.js",
+    "start":"node app.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rob2373/iTickets.git"
+  },
+  "author": "aztetics",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rob2373/iTickets/issues"
+  },
+  "homepage": "https://github.com/rob2373/iTickets#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
