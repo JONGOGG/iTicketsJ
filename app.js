@@ -36,6 +36,7 @@ app.post('/registro', (req, res) => {
         res.send('<script>alert("El nombre de usuario y la contraseña no pueden contener caracteres especiales."); window.location.href="/registro";</script>');
         return; 
     }
+    
   // Insertar un nuevo usuario en la base de datos
   const nuevoUsuario = usuarioModel.build({
     nombre: Nombre,
@@ -62,15 +63,15 @@ app.post('/registro', (req, res) => {
 
   app.post('/crear_ticket', (req, res) => {
     // Obtener los datos del formulario desde el cuerpo de la solicitud
-    const { usuario, email, asunto, descripcion, status } = req.body;
+    const { Usuario, Correo, Asunto, Descripcion, status } = req.body;
 
   // Insertar un nuevo usuario en la base de datos
   const nuevoTicket = TicketModel.build({
-    usuario: Nombre,
-    email: Apellido,
-    asunto: Correo,
-    descripcion: telefono,
-    status: user
+    usuario: Usuario,
+    email: Correo,
+    asunto: Asunto,
+    descripcion: Descripcion,
+    status: status
     // No necesitas incluir la fecha_registro ya que está configurada para establecerse automáticamente
   });
   

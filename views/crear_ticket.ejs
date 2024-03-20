@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Consultas</title>
+    <title>Generar Ticket</title>
 </head>
 <body>
   <div class="container mt-5">
@@ -21,25 +21,18 @@
             <input type="email" class="form-control" id="Correo" name="Correo" placeholder="Ej: Alda@gmail.com" required>
           </div>
           <div class="form-group">
-            <label for="Asunto">Asunto:</label>
-            <input type="text" class="form-control" id="Asunto" name="Asunto" placeholder="Ej: 4651112345" required>
-          </div>
-          <div class="form-group">
-            <label for="tipo_usuario">Tipo de usuario:</label>
-            <select class="form-select" name="tipo_usuario" id="tipo_usuario" required>
+            <label for="tipo_servicio">Tipo Servicio:</label>
+            <select class="form-select" name="tipo_servicio" id="tipo_servicio" required>
                 <option selected>-- Seleccione una de las opciones --</option>
                 <option value="Admin">Admin</option>
                 <option value="User">Usuario</option>
               </select>
           </div>
           <div class="form-group">
-            <label for="usuario">Usuario:</label>
-            <input type="text" class="form-control" id="user" name="user" title="No mayor a 20 caracteres" required>
+            <label for="descriptionInput">Descripción</label>
+          <textarea class="form-control" id="descriptionInput" rows="3" style="width: 400px;"></textarea>
           </div>
-          <div class="form-group">
-            <label for="pass">Contraseña:</label>
-            <input type="password" class="form-control" id="pass" name="pass" title="No mayor a 12 caracteres" required>
-          </div><br>
+          <br>
           <button type="submit" class="btn btn-info btn-block">Iniciar sesión</button>
         </form><br>
       </div><br>

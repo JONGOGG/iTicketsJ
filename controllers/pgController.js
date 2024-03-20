@@ -6,18 +6,6 @@ const login= (req,res) =>{
     })
 }
 
-<<<<<<< HEAD
-const consultas = (req,res) =>{
-    res.render('consultas',
-    {
-        title:"Consultas",
-    })
-}
-
-module.exports={
-    login,
-    consultas
-=======
 const registro= (req,res) =>{
     res.render('registro',
     {
@@ -32,10 +20,9 @@ const crear_ticket= (req,res) =>{
     })
 }
 
-
 module.exports={
     login,
     registro,
     crear_ticket
->>>>>>> b396c546c9deed74668d9cb171fd1acddbc9e57b
+
 }
