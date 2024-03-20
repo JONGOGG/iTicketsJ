@@ -7,6 +7,14 @@ const login= (req,res) =>{
     })
 }
 
+const consultas = (req,res) =>{
+    res.render('consultas',
+    {
+        title:"Consultas",
+    })
+}
+
 module.exports={
-    login
+    login,
+    consultas
 }
