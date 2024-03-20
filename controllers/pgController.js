@@ -1,4 +1,4 @@
-
+const usuarioModel=require('../models/model_usuario.js');
 const login= (req,res) =>{
     res.render('login',
     {
@@ -9,9 +9,10 @@ const login= (req,res) =>{
 const registro= (req,res) =>{
     res.render('registro',
     {
-        title:"Rgistro",
+        title:"Registro",
     })
 }
+
 
 module.exports={
     login,

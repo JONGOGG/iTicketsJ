@@ -13,34 +13,34 @@
         <h1 class="text-center">Iniciar sesión</h1>
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-6 col-sm-8">
-            <form method="POST" action="#">
+            <form method="POST" action="/registro">
               <div class="form-group">
                 <label for="Nombre">Nombre:</label>
-                <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+                <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ej: Aldayr Ramos de la riva" required>
               </div>
               <div class="form-group">
                 <label for="Correo">Correo:</label>
-                <input type="email" class="form-control" id="Correo" name="Correo" required>
+                <input type="email" class="form-control" id="Correo" name="Correo" placeholder="Ej: Alda@gmail.com" required>
               </div>
               <div class="form-group">
                 <label for="Telefono">Telefono:</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" required>
-              </div> <br>
+                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ej: 4651112345" required>
+              </div>
               <div class="form-group">
                 <label for="tipo_usuario">Tipo de usuario:</label>
-                <select class="form-select" name="tipo_usuario" id="tipo_usuario">
+                <select class="form-select" name="tipo_usuario" id="tipo_usuario" required>
+                    <option selected>-- Seleccione una de las opciones --</option>
                     <option value="Admin">Admin</option>
                     <option value="User">Usuario</option>
                   </select>
               </div>
-              <br>
               <div class="form-group">
                 <label for="usuario">Usuario:</label>
-                <input type="text" class="form-control" id="usuario" name="usuario" required>
+                <input type="text" class="form-control" id="user" name="user" title="No mayor a 20 caracteres" required>
               </div>
               <div class="form-group">
                 <label for="pass">Contraseña:</label>
-                <input type="password" class="form-control" id="pass" name="pass" required>
+                <input type="password" class="form-control" id="pass" name="pass" title="No mayor a 12 caracteres" required>
               </div><br>
               <button type="submit" class="btn btn-info btn-block">Iniciar sesión</button>
             </form><br>
