@@ -1,18 +1,14 @@
 const Sequelize = require('sequelize');
 const conexion = require('../config/conexion.js');
 
-const UsuarioModel = conexion.define("usuarios", {
+const TicketModel = conexion.define("tickets", {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true
     },
-    nombre: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    apellidos: {
+    usuario: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -21,28 +17,27 @@ const UsuarioModel = conexion.define("usuarios", {
         allowNull: false,
         unique: true
     },
-    telefono: {
+    asunto: {
         type: Sequelize.STRING, 
         allowNull: false
     },
-    tipo_usuario: {
+    descripcion: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    user: {
+    status: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
-    pass: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-    },
-    fecha_registro: {
+    fecha_expedido: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW 
+    },
+    fecha_cierre: {
+        type: Sequelize.DATE,
+        allowNull: true,
+        defaultValue: null 
     }
 });
 
-module.exports = UsuarioModel;
+module.exports = TicketModel;

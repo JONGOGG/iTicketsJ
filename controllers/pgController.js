@@ -1,4 +1,4 @@
-const usuarioModel=require('../models/model_usuario.js');
+
 const login= (req,res) =>{
     res.render('login',
     {
@@ -13,8 +13,16 @@ const registro= (req,res) =>{
     })
 }
 
+const crear_ticket= (req,res) =>{
+    res.render('crear_ticket',
+    {
+        title:"Creación de Ticket",
+    })
+}
+
 
 module.exports={
     login,
-    registro
+    registro,
+    crear_ticket
 }
