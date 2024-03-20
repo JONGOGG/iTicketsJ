@@ -6,6 +6,8 @@ const rutas = require('./routes/rutas')
 const usuarioModel=require('./models/model_usuario.js');
 const TicketModel=require('./models/model_ticket.js');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -23,6 +25,12 @@ app.post('/registro', (req, res) => {
     // Obtener los datos del formulario desde el cuerpo de la solicitud
     const { Nombre,Apellido, Correo, telefono, tipo_usuario, user, pass } = req.body;
 
+    bcrypt.hash(pass, saltRounds, (err, hash) => {
+        if (err) {
+            console.error('Error al cifrar la contraseña:', err);
+            return res.status(500).send('Error en el servidor');
+        }
+
     if (tipo_usuario === "-- Seleccione una de las opciones --") {
         res.send('<script>alert("Seleccione un tipo de usuario válido."); window.location.href="/registro";</script>');
         return; 
@@ -36,7 +44,7 @@ app.post('/registro', (req, res) => {
         res.send('<script>alert("El nombre de usuario y la contraseña no pueden contener caracteres especiales."); window.location.href="/registro";</script>');
         return; 
     }
-    
+
   // Insertar un nuevo usuario en la base de datos
   const nuevoUsuario = usuarioModel.build({
     nombre: Nombre,
@@ -45,7 +53,7 @@ app.post('/registro', (req, res) => {
     telefono: telefono,
     tipo_usuario: tipo_usuario,
     user: user,
-    pass: pass,
+    pass: hash,
     // No necesitas incluir la fecha_registro ya que está configurada para establecerse automáticamente
   });
   
@@ -60,18 +68,18 @@ app.post('/registro', (req, res) => {
               res.status(500).send('Error en el servidor'); // Enviar mensaje de error al cliente
           });
   });
+});
 
   app.post('/crear_ticket', (req, res) => {
     // Obtener los datos del formulario desde el cuerpo de la solicitud
-    const { Usuario, Correo, Asunto, Descripcion, status } = req.body;
+    const { Usuario, Correo, tipo_servicio, Descripcion } = req.body;
 
-  // Insertar un nuevo usuario en la base de datos
+  // Insertar un nuevo usuario en la base de datos                          
   const nuevoTicket = TicketModel.build({
     usuario: Usuario,
     email: Correo,
-    asunto: Asunto,
+    asunto: tipo_servicio,
     descripcion: Descripcion,
-    status: status
     // No necesitas incluir la fecha_registro ya que está configurada para establecerse automáticamente
   });
   
