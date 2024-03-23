@@ -118,9 +118,14 @@ const name = username;
 }
 
 const crear_ticket= (req,res) =>{
+    const rol = rolUser;
+    const name = username;
     res.render('crear_ticket',
     {
         title:"Creación de Ticket",
+        rol,
+        name
+
     })
 }
 
