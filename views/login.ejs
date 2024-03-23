@@ -40,16 +40,16 @@
                           
                                       <div class="container justify-content-center">
                                           <!-- inicio del formulario login-->
-                                          <form>
+                                          <form action="/login" method="post">
                                             <div class="form-group">
                                               <label for="username"> <h6>Nombre de usuario</h6> </label>
                                               <!-- Input nombre del usuario -->
-                                              <input type="text" class="form-control" id="username" placeholder="Ingresa tu nombre de usuario">
+                                              <input type="text" class="form-control" id="username" name="user" placeholder="Ingresa tu nombre de usuario">
                                             </div>
                                             <div class="form-group">
                                               <label for="password"> <h6> Contraseña </h6></label>
                                               <!-- Input contraseña -->
-                                              <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
+                                              <input type="password" class="form-control" id="password" name="pass" placeholder="Ingresa tu contraseña">
                                             </div>
                                             <div class="col-12 align-items-xl-center"> 
                                               <!-- boton de envio -->
