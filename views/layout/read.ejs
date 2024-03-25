@@ -1,0 +1,6 @@
+
+<% if (rol === 'User' ) { %>
+    <input type="text" class="form-control" id="Usuario" name="Usuario" value="<%- name -%>" readonly required>
+<% }  else if(rol === 'Admin') {%>
+    <input type="text" class="form-control" id="Usuario" name="Usuario" value="<%- name -%>" required>
+  <% } %>

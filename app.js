@@ -33,31 +33,6 @@ app.use(rutas);
 app.use(authMiddleware); 
 
 
-
-app.post('/crear_ticket', (req, res) => {
-    // Obtener los datos del formulario desde el cuerpo de la solicitud
-    const { Usuario, Correo, tipo_servicio, Descripcion } = req.body;
-
-    // Insertar un nuevo usuario en la base de datos
-    const nuevoTicket = TicketModel.build({
-        usuario: Usuario,
-        email: Correo,
-        asunto: tipo_servicio,
-        descripcion: Descripcion,
-    });
-
-    // Guardar la instancia en la base de datos
-    nuevoTicket.save()
-        .then(ticket => {
-            console.log('ticket creado correctamente:', ticket.toJSON());
-            res.send('<script>window.location.href="/login";</script>');
-        })
-        .catch(error => {
-            console.error('Error al insertar el usuario:', error);
-            res.status(500).send('Error en el servidor');
-        });
-});
-
 app.listen(port, () => {
     console.log(`El servidor está ejecutando en el puerto ${port}`);
 });

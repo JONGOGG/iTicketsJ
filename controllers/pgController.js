@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const usuarioModel = require('../models/Model_usuario');
+const TicketModel = require('../models/model_ticket.js');
 var rolUser="";
 var username="";
 const saltRounds = 10;
@@ -42,6 +43,7 @@ const loginVerificar = (req, res) => {
                 // Redirigir al usuario según su tipo de usuario
                 if (usuario.tipo_usuario === 'Admin') {
                     return res.redirect('/registro');
+
                 } else if (usuario.tipo_usuario === 'User') {
                     return res.redirect('/crear_ticket');
                 } else {
@@ -124,9 +126,34 @@ const crear_ticket= (req,res) =>{
     {
         title:"Creación de Ticket",
         rol,
-        name
+        name,
+        alterar:"readonly"
 
     })
+}
+
+const ticketAlt= (req,res) =>{
+    // Obtener los datos del formulario desde el cuerpo de la solicitud
+    const { Usuario, Correo, tipo_servicio, Descripcion } = req.body;
+
+    // Insertar un nuevo usuario en la base de datos
+    const nuevoTicket = TicketModel.build({
+        usuario: Usuario,
+        email: Correo,
+        asunto: tipo_servicio,
+        descripcion: Descripcion,
+    });
+
+    // Guardar la instancia en la base de datos
+    nuevoTicket.save()
+        .then(ticket => {
+            console.log('ticket creado correctamente:', ticket.toJSON());
+            res.send('<script>window.location.href="/login";</script>');
+        })
+        .catch(error => {
+            console.error('Error al insertar el usuario:', error);
+            res.status(500).send('Error en el servidor');
+        });
 }
 
 module.exports={
@@ -134,6 +161,7 @@ module.exports={
     loginVerificar,
     registro,
     registroAltas,
-    crear_ticket
+    crear_ticket,
+    ticketAlt
 
 }
