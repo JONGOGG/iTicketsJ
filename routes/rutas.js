@@ -27,4 +27,6 @@ router.get('/crear_ticket', (req, res, next) => {
 
 router.post('/crear_ticket', paginas.ticketAlt)
 
+router.get('/logout', paginas.logout)
+
 module.exports = router;
