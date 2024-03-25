@@ -164,12 +164,21 @@ const ticketAlt= (req,res) =>{
         });
 }
 
+const logout= (req,res) =>{
+   
+    res.cookie('token', null, {
+      expiresIn: new Date(0)
+    });
+    res.redirect('/login');
+}
+
 module.exports={
     login,
     loginVerificar,
     registro,
     registroAltas,
     crear_ticket,
-    ticketAlt
+    ticketAlt,
+    logout
 
 }
