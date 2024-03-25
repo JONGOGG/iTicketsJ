@@ -18,7 +18,7 @@ router.get('/registro', (req, res, next) => {
 router.post('/registro', paginas.registroAltas)
 
 router.get('/crear_ticket', (req, res, next) => {
-     if (req.tipo_usuario !== 'User') {
+     if (req.tipo_usuario !== 'User' && req.tipo_usuario !== 'Admin') {
         return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
     }
     // Si el tipo de usuario es 'admin', permitir acceso a la ruta

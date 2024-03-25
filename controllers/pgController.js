@@ -5,6 +5,9 @@ const TicketModel = require('../models/model_ticket.js');
 var rolUser="";
 var username="";
 const saltRounds = 10;
+const Swali = require('sweetalert2');
+
+
 
 const login= (req,res) =>{
     res.render('login',
@@ -19,7 +22,12 @@ const loginVerificar = (req, res) => {
     usuarioModel.findOne({ where: { user: user } })
         .then(usuario => {
             if (!usuario) {
-                return res.status(404).json({ message: 'Usuario no encontrado' });
+                Swali.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Usuario no encontrado',
+                });
+                return res.status(500).json({ message: 'Usuario No Encontrado' });
             }
 
             bcrypt.compare(pass, usuario.pass, (err, result) => {
