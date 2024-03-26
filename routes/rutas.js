@@ -45,5 +45,13 @@ router.get('/Listar_ticket', (req, res, next) => {
   next();
 }, paginas.Listar_ticket);
 
+router.get('/listar_usTicket', (req, res, next) => {
+    if (req.tipo_usuario !== 'User') {
+       return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
+   }
+   // Si el tipo de usuario es 'admin', permitir acceso a la ruta
+  next();
+}, paginas.listar_usTicket);
+
 
 module.exports = router;

@@ -201,6 +201,20 @@ const Listar_ticket = async (req, res) => {
 });
 }
 
+const listar_usTicket = async (req, res) => {
+    const rol = rolUser;
+    const name = username;
+    const UStickets = await TicketModel.findAll({ where: { usuario: name } });
+    res.render('listar_usTicket',
+    {UStickets,
+    title:'Listado de Tickets',
+    rol,
+    name
+
+});
+}
+
+
 module.exports={
     login,
     loginVerificar,
@@ -210,5 +224,6 @@ module.exports={
     ticketAlt,
     logout,
     usuarios,
-    Listar_ticket
+    Listar_ticket,
+    listar_usTicket
 }

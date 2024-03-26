@@ -1,0 +1,43 @@
+<%- include('./layout/navBars') -%>
+
+<!-- Form content -->
+<h1 class="text-primary text-center">Listado De Tickets</h1>
+<div class="bg-light border rounded-3 ">
+    
+  <div class="container align-items-center ">
+    <table id="ticketsTable">
+        <thead>
+            <tr class="bg-dark text-light">
+              <th scope="col">#Id</th>
+              <th scope="col">USUARIO</th>
+              <th scope="col">EMAIL</th>
+              <th scope="col">ASUNTO</th>
+              <th scope="col">DESCRIPCIÓN</th>
+              <th scope="col">ESTATUS</th>
+              <th scope="col">FECHA DE EXPEDICIÓN</th>
+              <th scope="col">FECHA DE CIERRE</th>
+            </tr>
+          </thead>
+        <tbody>
+          <% UStickets.forEach(function(ticket) { %>
+            <tr>
+              <td><%= ticket.id %></td>
+              <td><%= ticket.usuario %></td>
+              <td><%= ticket.email %></td>
+              <td><%= ticket.asunto %></td>
+              <td><%= ticket.descripcion %></td>
+              <td><%= ticket.status %></td>
+              <td><%= ticket.fecha_expedido %></td>
+              <td><%= ticket.fecha_cierre %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+    </table>
+   <br>
+  </div><br>
+</div>   
+ </div>
+ </div>  
+
+<%- include('./layout/pie')-%>
+
