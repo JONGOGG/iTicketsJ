@@ -5,7 +5,7 @@ const TicketModel = require('../models/model_ticket.js');
 var rolUser="";
 var username="";
 const saltRounds = 10;
-const Swali = require('sweetalert2');
+const Swal = require('sweetalert2');
 
 
 
@@ -22,11 +22,6 @@ const loginVerificar = (req, res) => {
     usuarioModel.findOne({ where: { user: user } })
         .then(usuario => {
             if (!usuario) {
-                Swali.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Usuario no encontrado',
-                });
                 return res.status(500).json({ message: 'Usuario No Encontrado' });
             }
 
@@ -54,7 +49,12 @@ const loginVerificar = (req, res) => {
 
                 } else if (usuario.tipo_usuario === 'User') {
                     return res.redirect('/crear_ticket');
-                } else {
+                } 
+                else if (usuario.tipo_usuario === 'Tecnico') {
+                    return res.redirect('/crear_ticket');
+                } 
+                
+                else {
                     return res.status(403).json({ message: 'Tipo de usuario no válido' });
                 }
             });
@@ -172,6 +172,35 @@ const logout= (req,res) =>{
     res.redirect('/login');
 }
 
+
+
+const usuarios = async (req, res) => {
+    const rol = rolUser;
+    const name = username;
+    const usuarios = await usuarioModel.findAll(); //Esto es lo que andas buscando pinche perro impio
+    res.render('usuarios',
+    {usuarios,
+    title:'Listado de Usuarios',
+    rol,
+    name
+
+});
+}
+
+
+const Listar_ticket = async (req, res) => {
+    const rol = rolUser;
+    const name = username;
+    const tickets = await TicketModel.findAll(); 
+    res.render('Listar_ticket',
+    {tickets,
+    title:'Listado de Tickets',
+    rol,
+    name
+
+});
+}
+
 module.exports={
     login,
     loginVerificar,
@@ -179,6 +208,7 @@ module.exports={
     registroAltas,
     crear_ticket,
     ticketAlt,
-    logout
-
+    logout,
+    usuarios,
+    Listar_ticket
 }

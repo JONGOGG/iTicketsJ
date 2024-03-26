@@ -3,4 +3,6 @@
     <%- include('./viewUser') -%>
 <% }  else if(rol === 'Admin') {%>
   <%- include('./superBar') -%>
+  <% }  else if(rol === 'Tecnico') {%>
+    <%- include('./adminUser') -%>
   <% } %>

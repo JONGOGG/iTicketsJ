@@ -18,7 +18,7 @@ router.get('/registro', (req, res, next) => {
 router.post('/registro', paginas.registroAltas)
 
 router.get('/crear_ticket', (req, res, next) => {
-     if (req.tipo_usuario !== 'User' && req.tipo_usuario !== 'Admin') {
+     if (req.tipo_usuario !== 'User' && req.tipo_usuario !== 'Admin' && req.tipo_usuario !== 'Tecnico') {
         return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
     }
     // Si el tipo de usuario es 'admin', permitir acceso a la ruta
@@ -28,5 +28,22 @@ router.get('/crear_ticket', (req, res, next) => {
 router.post('/crear_ticket', paginas.ticketAlt)
 
 router.get('/logout', paginas.logout)
+
+router.get('/usuarios', (req, res, next) => {
+    if (req.tipo_usuario !== 'Admin' && req.tipo_usuario !== 'Tecnico') {
+       return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
+   }
+   // Si el tipo de usuario es 'admin', permitir acceso a la ruta
+  next();
+}, paginas.usuarios);
+
+router.get('/Listar_ticket', (req, res, next) => {
+    if (req.tipo_usuario !== 'Admin' && req.tipo_usuario !== 'Tecnico') {
+       return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
+   }
+   // Si el tipo de usuario es 'admin', permitir acceso a la ruta
+  next();
+}, paginas.Listar_ticket);
+
 
 module.exports = router;

@@ -1,0 +1,44 @@
+<%- include('./layout/navBars') -%>
+
+
+<!-- Form content -->
+<h1 class="text-dark text-center">Listado De Usuarios</h1>
+<div class="bg-light border rounded-3 ">
+    
+  <div class="container align-items-center ">
+    <table id="usuariosTable">
+        <thead>
+            <tr class="bg-dark text-light">
+              <th scope="col">#Id</th>
+              <th scope="col">NOMBRE</th>
+              <th scope="col">APELLIDO</th>
+              <th scope="col">EMAIL</th>
+              <th scope="col">TELEFONO</th>
+              <th scope="col">TIPO DE USUARIO</th>
+              <th scope="col">USUARIO</th>
+              <th scope="col">FECHA DE REGISTRO</th>
+            </tr>
+          </thead>
+        <tbody>
+            <% usuarios.forEach(function(usuario) { %>
+                <tr>
+                    <td><%= usuario.id %></td>
+                    <td><%= usuario.nombre %></td>
+                    <td><%= usuario.apellidos %></td>
+                    <td><%= usuario.email %></td>
+                    <td><%= usuario.telefono %></td>
+                    <td><%= usuario.tipo_usuario %></td>
+                    <td><%= usuario.user %></td>
+                    <td><%= usuario.fecha_registro %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+   <br>
+  </div><br>
+</div>   
+ </div>
+ </div>  
+
+<%- include('./layout/pie')-%>
+

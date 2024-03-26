@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
         <title><%= title%></title>
         </head>
         <body class="">
@@ -14,7 +15,7 @@
             <div class="container-fluid  ">
                 <a class="navbar-brand text-light ms-2" href="#"><img src="./assets/logoSystem.png"  width="80" alt="" srcset=""></a>
                   
-                <a class="navbar-brand navbar-nav nav-item text-light ms-4 mb-1 mb-lg-0" href="#"><i class="fa-solid fa-circle-user fa-xl ms-3 ps-3 mt-2 mt-lg-3"></i> <h4 class="text-ligh ms-1 mt-sm-2 mt-lg-1 mt-3"> username</h4></a>
+                <a class="navbar-brand navbar-nav nav-item text-light ms-4 mb-1 mb-lg-0" href="#"><i class="fa-solid fa-circle-user fa-xl ms-3 ps-3 mt-2 mt-lg-3"></i> <h4 class="text-ligh ms-1 mt-sm-2 mt-lg-1 mt-3"> <%= name%></h4></a>
                
                
                   <ul class="navbar-nav me-auto mb-1 mb-lg-0 ">
@@ -26,7 +27,7 @@
                   </ul>
                   <ul class="navbar-nav mb-2 me-2 d-flex">
                       <li class="nav-item ">
-                          <a class="nav-link active text-light" aria-current="page" href="#"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>
+                          <a class="nav-link active text-light" aria-current="page" href="logout"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>
                         </li>
                   </ul>
               
@@ -49,13 +50,13 @@
                         </a>
                     </li>
                     <li class="nav-item mt-4">
-                        <a href="#" class="nav-link px-1 text-light">
+                        <a href="Listar_ticket" class="nav-link px-1 text-light">
                             <img class="fs-5 pb-1" src="./assets/icons/ticket.png"  width="35" alt="" srcset="">
                             <h6 class="d-none d-sm-inline ms-2">Consultar Tickets</h6>
                         </a>
                     </li>
                     <li class="nav-item  mt-4">
-                        <a href="registro" class="nav-link px-2 text-light"><i class="fa-solid fa-users fa-xl"></i>
+                        <a href="usuarios" class="nav-link px-2 text-light"><i class="fa-solid fa-users fa-xl"></i>
                             <h6 class="d-none d-sm-inline ms-2">Usuarios</h6>
                         </a>
                     </li>
