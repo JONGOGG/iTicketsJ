@@ -1,11 +1,8 @@
 const express = require("express");
 const app = express();
-const port = 4000;
+const port = 4200;
 const path = require("path");
 const rutas = require('./routes/rutas');
-const authMiddleware = require('./middleware/authMiddleware');
-const usuarioModel = require('./models/Model_usuario.js');
-const TicketModel = require('./models/model_ticket.js');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 /* const jwt = require('jsonwebtoken'); */
@@ -30,7 +27,7 @@ app.use(rutas);
 
 // Inicio de sesión
 // Aplicar middleware de autenticación a todas las rutas
-app.use(authMiddleware); 
+//app.use(authMiddleware); 
 
 
 app.listen(port, () => {

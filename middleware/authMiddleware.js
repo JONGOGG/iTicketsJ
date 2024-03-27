@@ -19,5 +19,27 @@ const authMiddleware = (req, res, next) => {
         next();
     });
 };
+const isAdmin = (req, res, next) => {
+    if (req.tipo_usuario !== 'Admin') {
+        return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
+    }
+    next();
+};
 
-module.exports = authMiddleware;
+const isTecnico = (req, res, next) => {
+    if (req.tipo_usuario !== 'Tecnico' && req.tipo_usuario !== 'Admin') {
+        return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
+    }
+    next();
+};
+
+const isUser = (req, res, next) => {
+    if (req.tipo_usuario !== 'User' && req.tipo_usuario !== 'Admin') {
+        return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
+    }
+    next();
+};
+
+
+
+module.exports = {authMiddleware, isAdmin, isTecnico, isUser}

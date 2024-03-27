@@ -24,7 +24,8 @@ const loginVerificar = (req, res) => {
             if (!usuario) {
                 return res.render('login', {
                     title: "Login",
-                    alertMessage: "Usuario no encontrado"
+                    alertMessage: "Usuario no encontrado",
+                    icon: "error",
                 });
             }
 
@@ -35,7 +36,11 @@ const loginVerificar = (req, res) => {
                 }
 
                 if (!result) {
-                    return res.status(401).json({ message: 'Credenciales inválidas' });
+                    return res.render('login', {
+                        title: "Login",
+                        alertMessage: "Contraseña incorrecta",
+                        icon: "error",
+                    });
                 }
                     
                 const token = jwt.sign({ tipo_usuario: usuario.tipo_usuario }, process.env.JWT_SECRET, {
