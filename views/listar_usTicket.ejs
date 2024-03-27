@@ -38,6 +38,17 @@
 </div>   
  </div>
  </div>  
-
+ <% if (typeof alertMessage !== 'undefined') { %>
+  <script>
+      Swal.fire({
+          title: 'Error',
+          text: '<%= alertMessage %>',
+          icon: '<%= icon%>',
+          confirmButtonText: 'OK'
+      }).them(()=>{
+        window.location = '/ <%= ruta %>'
+      })
+  </script>
+<% } %>
 <%- include('./layout/pie')-%>
 

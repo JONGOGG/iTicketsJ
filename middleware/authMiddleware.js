@@ -9,7 +9,12 @@ const authMiddleware = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-            return res.status(403).json({ message: 'Token inválido' });
+            return res.render('login', {
+                title: "Login",
+                alertMessage: "No tienes permisos para entrar a esta ruta",
+                icon: "error",
+                ruta: "login"
+            });
         }
 
         // Extraer el tipo de usuario del token decodificado y asignarlo a req.tipo_usuario
@@ -21,7 +26,11 @@ const authMiddleware = (req, res, next) => {
 };
 const isAdmin = (req, res, next) => {
     if (req.tipo_usuario !== 'Admin') {
-        return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
+          return res.render('login', {
+                title: "Login",
+                alertMessage: "No tienes permisos para entrar a esta ruta",
+                icon: "error",
+            });
     }
     next();
 };

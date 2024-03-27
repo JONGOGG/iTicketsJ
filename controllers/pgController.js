@@ -25,7 +25,7 @@ const loginVerificar = (req, res) => {
                 return res.render('login', {
                     title: "Login",
                     alertMessage: "Usuario no encontrado",
-                    icon: "error",
+                    icon: "error"
                 });
             }
 
