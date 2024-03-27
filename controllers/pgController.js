@@ -22,7 +22,10 @@ const loginVerificar = (req, res) => {
     usuarioModel.findOne({ where: { user: user } })
         .then(usuario => {
             if (!usuario) {
-                return res.status(500).json({ message: 'Usuario No Encontrado' });
+                return res.render('login', {
+                    title: "Login",
+                    alertMessage: "Usuario no encontrado"
+                });
             }
 
             bcrypt.compare(pass, usuario.pass, (err, result) => {

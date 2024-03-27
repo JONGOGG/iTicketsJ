@@ -75,7 +75,17 @@
             swal("¡Hola!", "Este es un mensaje de prueba", "success");
         }
         </script>
-        
+        <% if (typeof alertMessage !== 'undefined') { %>
+          <script>
+              Swal.fire({
+                  title: 'Error',
+                  text: '<%= alertMessage %>',
+                  icon: 'error',
+                  confirmButtonText: 'OK'
+              });
+          </script>
+      <% } %>
+      
 <%- include('./layout/pieLogin')-%>
         
         </html>
