@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Kalnia:wdth,wght@100..125,100..700&display=swap');
+
 p{
  color: aliceblue;
+}
+
+
+
+.alkatra{
+  font-size: 20px;
+  font-family: "Alkatra", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
