@@ -4,16 +4,17 @@
 <h1 class="text-primary text-center">Listado De Tickets</h1>
 <div class="bg-light border rounded-3 ">
     
-  <div class="container align-items-center ">
-    <table id="ticketsTable">
+  <div class="container align-items-center table-responsive">
+    <table id="ticketsTable" class="compact stripe order-column row-border hover">
         <thead>
-            <tr class="bg-dark text-light">
+            <tr class="bg-primary text-light">
               <th scope="col">#Id</th>
               <th scope="col">USUARIO</th>
               <th scope="col">EMAIL</th>
               <th scope="col">ASUNTO</th>
               <th scope="col">DESCRIPCIÓN</th>
               <th scope="col">ESTATUS</th>
+              <th scope="col">TECNICO ASIGNADO</th>
               <th scope="col">FECHA DE EXPEDICIÓN</th>
               <th scope="col">FECHA DE CIERRE</th>
             </tr>
@@ -27,6 +28,7 @@
               <td><%= ticket.asunto %></td>
               <td><%= ticket.descripcion %></td>
               <td><%= ticket.status %></td>
+              <td><%= ticket.tecnico %></td>
               <td><%= ticket.fecha_expedido %></td>
               <td><%= ticket.fecha_cierre %></td>
             </tr>

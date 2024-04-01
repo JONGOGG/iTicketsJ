@@ -10,14 +10,23 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
+        $('#ticketsTable').DataTable({
+            pageLength: 5,
+            lengthMenu:[[5,10,15,20, -1], [5,10,15,20, 'Todos']],
+
+            columnDefs: [
+            { orderable: false, className: "text-center", targets: [1, 2,3,4,5,7] } // Deshabilita el orden en las columnas 1 y 2
+        ]
+            
+        });
+        
         $('#usuariosTable').DataTable({
             pageLength: 5,
             lengthMenu:[[5,10,15,20, -1], [5,10,15,20, 'Todos']],
             
-        });
-        $('#ticketsTable').DataTable({
-            pageLength: 5,
-            lengthMenu:[[5,10,15,20, -1], [5,10,15,20, 'Todos']],
+            columnDefs: [
+            { orderable: false, targets: [1, 2,3,4,5,6,] } // Deshabilita el orden en las columnas 1 y 2
+        ]
             
         });
     });

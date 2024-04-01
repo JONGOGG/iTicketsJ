@@ -30,6 +30,11 @@ const TicketModel = conexion.define("tickets", {
         allowNull: false,
         defaultValue: "Pendiente" 
     },
+    tecnico: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: "Adiministrador" 
+    },
     fecha_expedido: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW 
