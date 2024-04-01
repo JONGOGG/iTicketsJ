@@ -3,6 +3,7 @@ const app = express();
 const port = 4000;
 const path = require("path");
 const rutas = require('./routes/rutas');
+
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 /* const jwt = require('jsonwebtoken'); */
@@ -24,6 +25,12 @@ app.use((req, res, next) => {
     next();
 });
 app.use(rutas);
+/* app.use(loginRutas);
+app.use(registroRutas);
+app.use(ticketsRutas); */
+
+
+
 
 // Inicio de sesión
 // Aplicar middleware de autenticación a todas las rutas
