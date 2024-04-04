@@ -10,9 +10,9 @@ const authMiddleware = (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.render('login', {
-                title: "Login",
+                title: "Advertencia",
                 alertMessage: "No tienes permisos para entrar a esta ruta",
-                icon: "error",
+                icon: "warning",
                 ruta: "login"
             });
         }
@@ -27,9 +27,9 @@ const authMiddleware = (req, res, next) => {
 const isAdmin = (req, res, next) => {
     if (req.tipo_usuario !== 'Admin') {
           return res.render('login', {
-                title: "Login",
+                title: "Advertencia",
                 alertMessage: "No tienes permisos para entrar a esta ruta",
-                icon: "error",
+                icon: "warning",
             });
     }
     next();
@@ -43,7 +43,7 @@ const isTecnico = (req, res, next) => {
 };
 
 const isUser = (req, res, next) => {
-    if (req.tipo_usuario !== 'User' && req.tipo_usuario !== 'Admin') {
+    if (req.tipo_usuario !== 'User' && req.tipo_usuario !== 'Admin' && req.tipo_usuario !== 'Tecnico') {
         return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
     }
     next();
