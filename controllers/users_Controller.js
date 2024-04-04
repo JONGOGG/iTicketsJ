@@ -61,7 +61,7 @@ const registroAltas = (req, res) => {
             .then(usuario => {
                 console.log('Usuario insertado correctamente:', usuario.toJSON());
                 return res.render('registro', {
-                    title: "Registado",
+                    title: "Registrado",
                     alertMessage: "Usuario insertado correctamente",
                     icon: "success",
                     rol: rolUser,
