@@ -73,8 +73,8 @@ const loginVerificar = (req, res) => {
 
 const logout= (req,res) =>{
    
-    res.cookie('token', null, {
-      expiresIn: new Date(0)
+    res.clearCookie('token',  {
+
     });
     res.redirect('/login');
 }
