@@ -5,6 +5,8 @@ const saltRounds = 10;
 
 /* Altas de usuario */
 const registroAltas = (req, res) => {
+    const { rolUser, username } = getRolUserAndUsername();
+    
     // Obtener los datos del formulario desde el cuerpo de la solicitud
     const { Nombre, Apellido, Correo, telefono, tipo_usuario, user, pass } = req.body;
 
@@ -15,17 +17,32 @@ const registroAltas = (req, res) => {
         }
 
         if (tipo_usuario === "-- Seleccione una de las opciones --") {
-            res.send('<script>alert("Seleccione un tipo de usuario válido."); window.location.href="/registro";</script>');
-            return;
+            return res.render('registro', {
+                title: "Error",
+                alertMessage: "Selecciona un tipo de usuario valido",
+                icon: "error",
+                rol: rolUser,
+                name: username
+            });
         }
         if (user.length > 15 || pass.length > 15 || telefono.length > 15) {
-            res.send('<script>alert("El usuario y la contraseña no pueden superar los 15 caracteres."); window.location.href="/registro";</script>');
-            return;
+            return res.render('registro', {
+                title: "Error",
+                alertMessage: "El usuario y la contraseña no pueden superar los 15 caracteres",
+                icon: "error",
+                rol: rolUser,
+                name: username
+            });
         }
         const regex = /^[a-zA-Z0-9\s]*$/;
         if (!regex.test(Nombre) || !regex.test(Apellido) || !regex.test(user) || !regex.test(pass)) {
-            res.send('<script>alert("El nombre de usuario y la contraseña no pueden contener caracteres especiales."); window.location.href="/registro";</script>');
-            return;
+            return res.render('registro', {
+                title: "Error",
+                alertMessage: "El nombre de usuario y la contraseña no pueden contener caracteres especiales",
+                icon: "error",
+                rol: rolUser,
+                name: username
+            });
         }
 
         // Insertar un nuevo usuario en la base de datos
@@ -43,7 +60,13 @@ const registroAltas = (req, res) => {
         nuevoUsuario.save()
             .then(usuario => {
                 console.log('Usuario insertado correctamente:', usuario.toJSON());
-                res.send('<script>window.location.href="/login";</script>');
+                return res.render('registro', {
+                    title: "Registado",
+                    alertMessage: "Usuario insertado correctamente",
+                    icon: "success",
+                    rol: rolUser,
+                    name: username
+                });
             })
             .catch(error => {
                 console.error('Error al insertar el usuario:', error);

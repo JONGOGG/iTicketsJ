@@ -20,7 +20,7 @@ const loginVerificar = (req, res) => {
         .then(usuario => {
             if (!usuario) {
                 return res.render('login', {
-                    title: "Login",
+                    title: "Error",
                     alertMessage: "Usuario no encontrado",
                     icon: "error"
                 });
@@ -34,7 +34,7 @@ const loginVerificar = (req, res) => {
 
                 if (!result) {
                     return res.render('login', {
-                        title: "Login",
+                        title: "Error",
                         alertMessage: "Contraseña incorrecta",
                         icon: "error",
                     });

@@ -14,6 +14,7 @@ const crear_ticket= (req,res) =>{
 }
 
 const ticketAlt= (req,res) =>{
+    const { rolUser, username } = getRolUserAndUsername();
     // Obtener los datos del formulario desde el cuerpo de la solicitud
     const { Usuario, Correo, tipo_servicio, Descripcion } = req.body;
 
@@ -29,7 +30,13 @@ const ticketAlt= (req,res) =>{
     nuevoTicket.save()
         .then(ticket => {
             console.log('ticket creado correctamente:', ticket.toJSON());
-            res.send('<script>window.location.href="/login";</script>');
+            return res.render('crear_ticket', {
+                title: "Ticket",
+                alertMessage: "Ticket creado correctamente",
+                icon: "success",
+                rol: rolUser,
+                name: username
+            });
         })
         .catch(error => {
             console.error('Error al insertar el usuario:', error);
