@@ -1,14 +1,18 @@
 const jwt = require('jsonwebtoken');
+const {getRolUserAndUsername} = require('../controllers/loginOut_Controller.js');
 
 const logoutcok = (req, res, next) => {
+    const { rolUser, username } = getRolUserAndUsername();
     const token = req.cookies.token;
-
+    
  
         if (token) {
             return res.render('login', {
-                title: "Advertencia",
+                title: "Redirigiendo",
                 alertMessage: "Ya tiene una sesion abierta",
-                icon: "warning",
+                icon: "success",
+                rolUser,
+                username,
             });
         }
         next();
@@ -16,15 +20,16 @@ const logoutcok = (req, res, next) => {
 
 
 const authMiddleware = (req, res, next) => {
+    
     const token = req.cookies.token;
-
     if (!token) {
         return res.render('login', {
             title: "Advertencia",
-            alertMessage: "No hay una sesión iniciada",
+            alertMessag: "No hay una sesión iniciada",
             icon: "warning",
-            ruta: "login"
+            ruta:'login'
         });
+        
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
@@ -45,11 +50,13 @@ const authMiddleware = (req, res, next) => {
     });
 };
 const isAdmin = (req, res, next) => {
+    const { rolUser, username } = getRolUserAndUsername();
     if (req.tipo_usuario !== 'Admin') {
           return res.render('login', {
                 title: "Advertencia",
                 alertMessage: "No tienes permisos para entrar a esta ruta",
                 icon: "warning",
+                rolUser
             });
     }
     next();
@@ -71,4 +78,4 @@ const isUser = (req, res, next) => {
 
 
 
-module.exports = {authMiddleware, isAdmin, isTecnico, isUser, logoutcok}
+module.exports = { authMiddleware, isAdmin, isTecnico, isUser, logoutcok };

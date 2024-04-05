@@ -21,7 +21,7 @@ const loginVerificar = (req, res) => {
             if (!usuario) {
                 return res.render('login', {
                     title: "Error",
-                    alertMessage: "Usuario no encontrado",
+                    alertMessag: "Usuario no encontrado",
                     icon: "error"
                 });
             }
@@ -35,7 +35,7 @@ const loginVerificar = (req, res) => {
                 if (!result) {
                     return res.render('login', {
                         title: "Error",
-                        alertMessage: "Contraseña incorrecta",
+                        alertMessag: "Contraseña incorrecta",
                         icon: "error",
                     });
                 }
@@ -71,13 +71,19 @@ const loginVerificar = (req, res) => {
    
 };
 
-const logout= (req,res) =>{
-   
-    res.clearCookie('token',  {
-
-    });
+const logout = (req, res) => {
+    // Borrar la cookie de autenticación
+    res.clearCookie('token');
+    
+    // Configurar encabezados de respuesta para evitar el almacenamiento en caché
+    res.header('Cache-Control', 'no-cache, no-store, must-revalidate'); // HTTP 1.1
+    res.header('Pragma', 'no-cache'); // HTTP 1.0
+    res.header('Expires', '0'); // Proxies
+    
+    // Redirigir al usuario al inicio de sesión
     res.redirect('/login');
-}
+};
+
 const getRolUserAndUsername = () => {
     return { rolUser, username };
 };

@@ -63,6 +63,7 @@
         <script src="./js/boostrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+        <!-- sweetalert2 para usado para mostrar errores o procesos ejecutados con exito  -->
         <% if (typeof alertMessage !== 'undefined') { %>
           <script>
               Swal.fire({
@@ -71,11 +72,27 @@
                   icon: '<%= icon%>',
                   confirmButtonText: 'OK'
               }).then(()=>{
-                window.history.back();
+                const rolUser = '<%= rolUser %>';
+                if (rolUser === 'Admin') {
+                    window.location.href = '/registro';
+                } else if (rolUser === 'User' || rolUser === 'Tecnico') {
+                    window.location.href = '/crear_ticket';
+                }
               })
           </script>
       <% } %>
 
+  <!-- sweetalert2 Para  -->
+      <% if (typeof alertMessag !== 'undefined') { %>
+        <script>
+            Swal.fire({
+              title: '<%= title %>',
+                text: '<%= alertMessag %>',
+                icon: '<%= icon%>',
+                confirmButtonText: 'OK'
+            })
+        </script>
+    <% } %>
       
 <%- include('./layout/pieLogin')-%>
         
