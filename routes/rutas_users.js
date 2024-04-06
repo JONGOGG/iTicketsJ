@@ -6,4 +6,5 @@ const auth = require('../middleware/authMiddleware');
 router.get('/registro', auth.isAdmin, registro.registro);
 router.post('/registro', auth.isAdmin, registro.registroAltas);
 router.get('/usuarios', auth.isTecnico, registro.usuarios);
+router.get('/delete/:id', auth.isAdmin, registro.eliminar);
 module.exports= router;

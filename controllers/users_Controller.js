@@ -87,7 +87,7 @@ const { rolUser, username } = getRolUserAndUsername();
 
 const usuarios = async (req, res) => {
     const { rolUser, username } = getRolUserAndUsername();
-    const usuarios = await usuarioModel.findAll(); //Esto es lo que andas buscando pinche perro impio
+    const usuarios = await usuarioModel.findAll(); 
     res.render('usuarios',
     {usuarios,
     title:'Listado de Usuarios',
@@ -97,8 +97,30 @@ const usuarios = async (req, res) => {
 });
 }
 
+const eliminar = async (req, res) => {
+    const { rolUser, username } = getRolUserAndUsername();
+    const req_id=req.params.id;
+    usuarioModel.destroy({
+    where:{
+        id:req_id
+    }
+   });
+   const usuarios = await usuarioModel.findAll(); 
+   return res.render('usuarios', { rol: rolUser,
+    name: username,
+    usuarios,
+    title: "Eliminado",
+    alertMessage: "Usuario eliminado correctamente",
+    icon: "success",
+   
+});
+}
+
+
+
 module.exports={
     registro,
     registroAltas,
-    usuarios 
+    usuarios,
+    eliminar
 }

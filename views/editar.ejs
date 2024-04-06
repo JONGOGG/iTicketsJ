@@ -1,0 +1,38 @@
+<%- include('./layout/navBars') -%>
+
+
+<!-- Form content -->
+<div class="bg-light border rounded-3 ">
+  <div class="container align-items-center ">
+
+    <div class="row justify-content-center">
+  <h1 class="text-center ">Registro</h1>
+  <div class="col-lg-8 col-md-10 col-sm-12">
+    <form method="POST" action="/editar" >
+      <div class="form-group">
+        <label for="Nombre">Nombre:</label>
+        <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+    
+        <label for="Apellido">Apellido:</label>
+        <input type="text" class="form-control" id="Apellido" name="Apellido" placeholder="Ej: Ramos de la riva" required>
+
+        <label for="Correo">Correo:</label>
+        <input type="email" class="form-control" id="Correo" name="Correo" placeholder="Ej: Alda@gmail.com" required>
+      
+        <label for="Telefono">Telefono:</label>
+        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ej: 4651112345" required>
+     
+        <label for="usuario">Usuario:</label>
+        <input type="text" class="form-control" id="user" name="user" title="No mayor a 20 caracteres" required>
+      </div>
+      </div><br>
+      <div class="form-group text-center mt-2">
+      <button type="submit" class="btn btn-info btn-block me-auto ms-auto">Registrar</button>
+    </div>
+    </form><br>
+  </div><br>
+</div>   
+ </div>
+ </div>  
+
+<%- include('./layout/pie')-%>

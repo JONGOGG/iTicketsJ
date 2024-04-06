@@ -5,7 +5,7 @@
 <div class="bg-light border rounded-3 ">
     
   <div class="container align-items-center table-responsive">
-    <table id="ticketsTable" class="compact stripe order-column row-border hover">
+    <table id="ticketsTable" class=" compact stripe order-column row-border hover">
         <thead>
             <tr class="bg-primary text-light">
               <th scope="col">#Id</th>
@@ -17,6 +17,7 @@
               <th scope="col">TECNICO ASIGNADO</th>
               <th scope="col">FECHA DE EXPEDICIÓN</th>
               <th scope="col">FECHA DE CIERRE</th>
+              <th scope="col">ACCIONES</th>
             </tr>
           </thead>
         <tbody>
@@ -31,6 +32,10 @@
               <td><%= ticket.tecnico %></td>
               <td><%= ticket.fecha_expedido %></td>
               <td><%= ticket.fecha_cierre %></td>
+              <td>
+                <a onclick="asignar(<%= ticket.id %>)" class="btn btn-outline-primary">Asignar</a>
+                <a onclick="finalizar(<%= ticket.id %>)" class="btn btn-outline-danger">Finalizar</a>
+              </td>
             </tr>
           <% }); %>
         </tbody>

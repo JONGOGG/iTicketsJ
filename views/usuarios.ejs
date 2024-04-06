@@ -17,6 +17,7 @@
               <th scope="col">TIPO DE USUARIO</th>
               <th scope="col">USUARIO</th>
               <th scope="col">FECHA DE REGISTRO</th>
+              <th scope="col">ACCIONES</th>
             </tr>
           </thead>
         <tbody>
@@ -30,6 +31,10 @@
                     <td><%= usuario.tipo_usuario %></td>
                     <td><%= usuario.user %></td>
                     <td><%= usuario.fecha_registro %></td>
+                    <td>
+                      <a onclick="editar(<%= usuario.id %>)" class="btn btn-outline-primary">editar</a>
+                      <a onclick="eliminar(<%= usuario.id %>)" class="btn btn-outline-danger">borrar</a>
+                    </td>
                 </tr>
             <% }); %>
         </tbody>
