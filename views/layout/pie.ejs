@@ -5,7 +5,7 @@
 <!-- Footer content and scripts -->
 
 </body>
-<script src="./js/boostrap.min.js"></script>
+<script src="../js/boostrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/46bd9c6211.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -49,29 +49,122 @@
             CancelButtonText: "Cancelar"
           }).then((result) => {
             if (result.isConfirmed) {
-                window.location='/delete/'+id;
-                
+              window.location='/delete/'+id;
+                Swal.fire({
+                  title: "Eliminado!",
+                  text: "El registro ha sido eliminado.",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer:3000
+                });
+
+                setTimeout(function() {
+                  window.location='/usuarios';
+              }, 1000);
             }
           })
 }
 
-function editar(id){
+function editar() {
+  var valor = document.getElementById("id").value;
+  var nombre = document.getElementById("nombre").value; // Suponiendo que tienes un campo de nombre en tu formulario
+  var apellido = document.getElementById("apellidos").value; // Suponiendo que tienes un campo de apellido en tu formulario
+  var email = document.getElementById("email").value; // Suponiendo que tienes un campo de apellido en tu formulario
+  var telefono = document.getElementById("telefono").value; // Suponiendo que tienes un campo de apellido en tu formulario
+
+  // Verificar si alguno de los campos está vacío
+  if (nombre.trim() === '' || apellido.trim() === '' ||email.trim() === ''||telefono.trim() === '') {
+      Swal.fire({
+          title: 'Error',
+          text: 'Por favor, completa todos los campos antes de editar el registro.',
+          icon: 'error'
+      });
+      return; // Detener la ejecución si algún campo está vacío
+  }
+  if ( apellido.length > 40) {
+    Swal.fire({
+        title: 'Error',
+        text: 'el campo nombre no pueden tener más de 40 caracteres.',
+        icon: 'error'
+    });
+    return; // Detener la ejecución si algún campo excede la longitud máxima
+}
+if (nombre.length > 30) {
   Swal.fire({
-      title: '¿Quieres editar el registro: '+id+'?',
-      text: "Si editas el registro no podras revertir la accion",
+      title: 'Error',
+      text: 'el campo nombre no pueden tener más de 30 caracteres.',
+      icon: 'error'
+  });
+  return; // Detener la ejecución si algún campo excede la longitud máxima
+}
+
+if ( telefono.length > 15 || telefono.length < 10) {
+  Swal.fire({
+      title: 'Error',
+      text: 'el campo telefono no pueden tener más de 15 caracteres.',
+      icon: 'error'
+  });
+  return; // Detener la ejecución si algún campo excede la longitud máxima
+}
+
+if (!email.endsWith('@gmail.com')) {
+  Swal.fire({
+      title: 'Error',
+      text: 'El email debe tener la extensión @gmail.com.',
+      icon: 'error'
+  });
+  return; // Detener la ejecución si el email no tiene la extensión deseada
+}
+
+var regex = /^[a-zA-Z\s]+$/;
+    if (!regex.test(nombre) || !regex.test(apellido)) {
+        Swal.fire({
+            title: 'Error',
+            text: 'Los campos Nombre y Apellido no pueden contener caracteres especiales ni numeros.',
+            icon: 'error'
+        });
+        return; // Detener la ejecución si se encuentran caracteres especiales
+    }
+
+    var regexTelefono = /^[0-9]+$/;
+    if (!regexTelefono.test(telefono)) {
+        Swal.fire({
+            title: 'Error',
+            text: 'El campo de teléfono solo puede contener números.',
+            icon: 'error'
+        });
+        return; // Detener la ejecución si el campo de teléfono contiene caracteres no numéricos
+    }
+  
+
+  Swal.fire({
+      title: '¿Quieres editar el registro: ' + valor + '?',
+      text: "Si editas el registro no podrás revertir la acción",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Editar",
-      CancelButtonText: "Cancelar"
-    }).then((result) => {
+      cancelButtonText: "Cancelar"
+  }).then((result) => {
       if (result.isConfirmed) {
-          window.location='/update/'+id;
-          
+          document.getElementById("miFormulario").submit();
+          Swal.fire({
+              title: "Editado!",
+              text: "El registro ha sido editado.",
+              icon: "success",
+              showConfirmButton: false,
+          });
+          setTimeout(function () {
+              window.location = '/usuarios';
+          }, 1000);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Si el usuario presiona "Cancelar", redirigir a la ruta deseada
+          window.location = '/usuarios';
       }
-    })
+  })
 }
+
 </script>
 
 <% if (typeof alertMessage !== 'undefined') { %>

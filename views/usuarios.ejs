@@ -5,7 +5,7 @@
 <h1 class="text-dark text-center">Listado De Usuarios</h1>
 <div class="bg-light border rounded-3 ">
     
-  <div class="container align-items-center ">
+  <div class="container align-items-center table-responsive">
     <table id="usuariosTable" class="compact stripe order-column row-border hover">
         <thead>
             <tr class="bg-primary text-light">
@@ -32,7 +32,7 @@
                     <td><%= usuario.user %></td>
                     <td><%= usuario.fecha_registro %></td>
                     <td>
-                      <a onclick="editar(<%= usuario.id %>)" class="btn btn-outline-primary">editar</a>
+                      <a href="/editar/<%= usuario.id %>" class="btn btn-outline-primary">editar</a>
                       <a onclick="eliminar(<%= usuario.id %>)" class="btn btn-outline-danger">borrar</a>
                     </td>
                 </tr>

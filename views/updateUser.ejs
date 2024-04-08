@@ -1,0 +1,41 @@
+<%- include('./layout/navBars') -%>
+
+
+<!-- Form content -->
+<% usuarios.forEach(function(user) { %>
+<div class="bg-light border rounded-3 ">
+  <div class="container align-items-center ">
+
+    <div class="row justify-content-center">
+  <h1 class="text-center ">Actualizar</h1>
+  <div class="col-lg-8 col-md-10 col-sm-12">
+    <form method="POST" action="/editar" id="miFormulario">
+      <div class="form-group">
+        <input type="text" class="form-control" id="id" name="id" value="<%= user.id %>" required hidden>
+    
+        <label for="Nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="<%= user.nombre %>" required>
+    
+        <label for="Apellido">Apellido:</label>
+        <input type="text" class="form-control" id="apellidos" name="apellidos" value="<%= user.apellidos %>" placeholder="Ej: Ramos de la riva" required>
+
+        <label for="Correo">Correo:</label>
+        <input type="email" class="form-control" id="email" name="email" value="<%= user.email%>"  placeholder="Ej: Alda@gmail.com" required>
+      
+        <label for="Telefono">Telefono:</label>
+        <input type="text" class="form-control" id="telefono" name="telefono" value="<%= user.telefono %>" placeholder="Ej: 4651112345" required>
+     
+       
+      </div>
+      
+    <br>
+      <div class="form-group text-center mt-2">
+      <button type="button" id="btnEnviar" class="btn btn-info btn-block me-auto ms-auto" onclick="editar()" >Actualizar</button>
+    </div>
+    </form><br>
+  </div><br>
+</div>   
+ </div>
+ </div>  
+ <% }); %>
+<%- include('./layout/pie')-%>

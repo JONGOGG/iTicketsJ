@@ -1,0 +1,10 @@
+
+<% ticket.forEach(function(user) { %>
+<% if (rol === 'User' ) { %>
+    <input type="email" class="form-control" id="Correo" name="Correo" value="<%- user.email -%>" placeholder="Ej: Alda@gmail.com" required readonly>
+<% }  else if(rol === 'Admin') {%>
+    <input type="email" class="form-control" id="Correo" name="Correo" value="<%- user.email -%>" placeholder="Ej: Alda@gmail.com" required>
+  <% } else if(rol === 'Tecnico') {%>
+    <input type="email" class="form-control" id="Correo" name="Correo" value="<%- user.email -%>" placeholder="Ej: Alda@gmail.com" required>
+  <% } %>
+  <% }); %>
