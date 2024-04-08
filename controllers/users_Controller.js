@@ -105,15 +105,7 @@ const eliminar = async (req, res) => {
         id:req_id
     }
    });
-   const usuarios = await usuarioModel.findAll(); 
-   return res.render('usuarios', { rol: rolUser,
-    name: username,
-    usuarios,
-    title: "Eliminado",
-    alertMessage: "Usuario eliminado correctamente",
-    icon: "success",
-   
-});
+   res.redirect('/Usuarios')
 }
 
 

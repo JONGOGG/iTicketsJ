@@ -74,12 +74,6 @@ const loginVerificar = (req, res) => {
 const logout = (req, res) => {
     // Borrar la cookie de autenticación
     res.clearCookie('token');
-    
-    // Configurar encabezados de respuesta para evitar el almacenamiento en caché
-    res.header('Cache-Control', 'no-cache, no-store, must-revalidate'); // HTTP 1.1
-    res.header('Pragma', 'no-cache'); // HTTP 1.0
-    res.header('Expires', '0'); // Proxies
-    
     // Redirigir al usuario al inicio de sesión
     res.redirect('/login');
 };
