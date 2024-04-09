@@ -2,6 +2,8 @@ const TicketModel = require('../models/model_ticket.js');
 const usuarioModel = require('../models/Model_usuario');
 const Sequelize = require('sequelize');
 const {getRolUserAndUsername} = require('./loginOut_Controller.js');
+const transporter = require('../config/mailer.js');
+
 
 const crear_ticket= async(req,res) =>{
     const { rolUser, username } = getRolUserAndUsername();
@@ -136,55 +138,98 @@ const Listar_Tecticket = async (req, res) => {
 
 });
 }
-const asignar= async(req,res) =>{
-    const { rolUser, username } = getRolUserAndUsername();
-    const req_id=req.params.id;
-    const usuarios = await usuarioModel.findAll({
-        where:{
-            tipo_usuario:"Tecnico"
-        }
-    }); 
-    const asig = await TicketModel.findAll({
-        where:{
-            id:req_id
-        }
-    });
+const asignar = async (req, res) => {
+    try {
+        const { rolUser, username } = getRolUserAndUsername();
+        const req_id = req.params.id;
+        const usuarios = await usuarioModel.findAll({
+            where: {
+                tipo_usuario: "Tecnico"
+            }
+        });
+        const asig = await TicketModel.findAll({
+            where: {
+                id: req_id
+            }
+        });
 
         res.render('asignar',
-        { 
-            title:"Asignar Tecnico",
-            rol: rolUser,
-            name: username,
-            usuarios:usuarios,
-            asig:asig
+            {
+                title: "Asignar Tecnico",
+                rol: rolUser,
+                name: username,
+                usuarios: usuarios,
+                asig: asig
 
-        })
+            });
+    } catch (error) {
+        console.error('Error al cargar la página de asignación de técnico:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
     }
+};
 
-    const asignado = async (req, res) => {
-        try {
-            const { id, tecnico } = req.body;
-    
-            // Verificar si el usuario tiene permisos adecuados para realizar la actualización
-            // Esto puede incluir alguna lógica de autenticación y autorización
-    
-            // Realizar la actualización en la base de datos
-            await TicketModel.update(
-                // Los datos que se van a actualizar
-                { tecnico}, 
-                // Opciones de búsqueda
-                { 
-                    where: { id: id } // Aquí se especifica qué registro debe ser actualizado
+const asignado = async (req, res) => {
+    try {
+        const { id, tecnico } = req.body;
+
+        // Realizar la actualización en la base de datos
+        await TicketModel.update(
+            { tecnico },
+            { where: { id: id } }
+        );
+
+        // Buscar la información del técnico asignado en la base de datos
+        const tecnicoInfo = await usuarioModel.findOne({ where: { user: tecnico } });
+
+        // Verificar si se encontró la información del técnico
+        if (tecnicoInfo) {
+            // Obtener la dirección de correo electrónico del técnico
+            const correoTecnico = tecnicoInfo.email;
+
+            // Construir el cuerpo del correo electrónico
+            const ticketInfo = await TicketModel.findOne({ where: { id: id } });
+            const mailBody = `
+            <h2>Te informamos que se ha generado un nuevo ticket en nuestro sistema</h2>
+                <p>A continuación, te proporciono los detalles pertinentes:</p>
+                <ul>
+                    <li><strong>Número de Ticket:</strong> ${ticketInfo.id}</li>
+                    <li><strong>Fecha de Creación:</strong> ${ticketInfo.fecha_expedido}</li>
+                    <li><strong>Cliente:</strong> ${ticketInfo.usuario}</li>
+                    <li><strong>Área:</strong> ${ticketInfo.asunto}</li>
+                    <li><strong>Descripción Breve del Problema:</strong> ${ticketInfo.descripcion}</li>
+                </ul>
+                <p>Te solicito que revises este ticket y tomes las medidas necesarias para abordarlo de manera oportuna y eficiente.</p>
+                <p>Gracias por tu atención y pronta acción.</p>
+                <p>Saludos cordiales</p>
+            `;
+
+            // aqui se detalla el contenido del correo electronico
+
+
+            let mailOptions = {
+                from: 'aztetics.ti@gmail.com',
+                to: correoTecnico,
+                subject: 'Nuevo asignado ticket',
+                html: mailBody
+            };
+
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    console.log(error);
+                    res.status(500).send('Error al enviar el correo electrónico');
+                } else {
+                    console.log('Correo electrónico enviado: ' + info.response);
+                    res.send('¡Correo electrónico enviado con éxito!');
                 }
-            );
-    
-            
-    
-        } catch (error) {
-            console.error('Error al actualizar usuario:', error);
-            return res.status(500).json({ error: 'Error interno del servidor' });
+            });
+        } else {
+            res.status(404).send('Técnico no encontrado');
         }
-    };
+    } catch (error) {
+        console.error('Error al asignar técnico:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
 
 
     const finalizar = async (req, res) => {

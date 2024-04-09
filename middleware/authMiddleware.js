@@ -63,12 +63,17 @@ const isAdmin = (req, res, next) => {
 };
 
 const isTecnico = (req, res, next) => {
-    if (req.tipo_usuario !== 'Tecnico' && req.tipo_usuario !== 'Admin') {
-        return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
-    }
-    next();
+    const { rolUser, username } = getRolUserAndUsername();
+    if (req.tipo_usuario !== 'Admin' && req.tipo_usuario !== 'Tecnico' ) {
+        return res.render('login', {
+              title: "Advertencia",
+              alertMessage: "No tienes permisos para entrar a esta ruta",
+              icon: "warning",
+              rolUser
+          });
+  }
+  next();
 };
-
 const isUser = (req, res, next) => {
     if (req.tipo_usuario !== 'User' && req.tipo_usuario !== 'Admin' && req.tipo_usuario !== 'Tecnico') {
         return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
