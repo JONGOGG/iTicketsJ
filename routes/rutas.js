@@ -3,13 +3,14 @@ const router = express.Router();
 const loginRutas = require('./rutas_loginOut');
 const registroRutas = require('./rutas_users');
 const ticketsRutas = require('./rutas_tickets');
+const analiticsRutas = require('./rutas_analitics');
 
 
 
 router.use(loginRutas);
 router.use(registroRutas);
 router.use(ticketsRutas);
-
+router.use(analiticsRutas);
 module.exports = router
 
  

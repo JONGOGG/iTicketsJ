@@ -1,0 +1,123 @@
+<%- include('./layout/navBars') -%>
+<div class="bg-light border rounded-2 ">
+<h1 class="text-primary text-center">Estadisticas</h1>
+<div class="row">
+
+       <!-- Pending Requests Card Example -->
+       <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card border-left- shadow h-100 py-2  bg-warning">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-1">
+                        <div class="text-xs font-weight-bold text-light text-uppercase mb-1 ">
+                            <h5>Tickets Creados</h5></div>
+                        <div class="h5 mb-0 font-weight-bold text-light"><h5><%= numTickets%></h5></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-clipboard-list fa-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- Pending Requests Card Example -->
+   <div class="col-xl-6 col-md-6 mb-4">
+    <div class="card border-left-warning shadow h-100 py-2  bg-dark">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-1">
+                    <div class="text-xs font-weight-bold text-light text-uppercase mb-1">
+                        <h5>Usuarios Registrados</h5></div>
+                    <div class="h5 mb-0 font-weight-bold text-light"><h5><%= numUsers%></h5></div>
+                </div>
+                <div class="col-auto">
+                    <i class="fa-solid fa-users fa-2xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+     <!-- Pending Requests Card Example -->
+     <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2 bg-success">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-1">
+                        <div class="text-xs font-weight-bold text-light text-uppercase mb-1">
+                            <h5>Tickets Finalizados</h5></div>
+                        <div class="h5 mb-0 font-weight-bold text-light"><h5><%= numPendientes%></h5></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-check-to-slot fa-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card border-left-warning bg-danger shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-1">
+                        <div class="text-xs font-weight-bold text-light text-uppercase mb-1">
+                            <h5>Tickets Pendientes</h5></div>
+                        <div class="h5 mb-0 font-weight-bold text-light"><h5><%= numFinalizados%></h5></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-stopwatch fa-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<canvas id="graficaLineas"></canvas> 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const mesesP=[<%= mesesP%>]
+const mesesR=[<%= mesesR%>]
+  // Datos para la gráfica
+  var datos = {
+      labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+      datasets: [{
+          label: "Tickets Realizados",
+          data: mesesR,
+          borderColor: 'rgb(24, 188, 157)',
+          backgroundColor: "transparent"
+      },
+      {
+          label: "Tickets Pendientes",
+          data: mesesP,
+          borderColor: "rgb(231, 76, 60)",
+          backgroundColor: "transparent"
+      }]
+  };
+
+  // Configuración de la gráfica
+  var configuracion = {
+      type: 'line',
+      data: datos,
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  };
+
+  // Obtener el lienzo donde se renderizará la gráfica
+  var lienzo = document.getElementById('graficaLineas').getContext('2d');
+
+  // Crear la instancia de la gráfica
+  var graficaLineas = new Chart(lienzo, configuracion);
+</script>
+
+<%- include('./layout/pie')-%>
