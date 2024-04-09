@@ -1,0 +1,6 @@
+
+<% if(rol === 'Admin') {%>
+    <button type="button" id="btnEnviar" class="btn btn-info btn-block me-auto ms-auto" onclick="finalizar()" >Finalizar</button>
+  <% } else if(rol === 'Tecnico') {%>
+    <button type="button" id="btnEnviar" class="btn btn-info btn-block me-auto ms-auto" onclick="finalizarTec()" >Finalizar</button>
+  <% } %>

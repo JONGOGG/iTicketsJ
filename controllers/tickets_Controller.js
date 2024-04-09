@@ -1,5 +1,6 @@
 const TicketModel = require('../models/model_ticket.js');
 const usuarioModel = require('../models/Model_usuario');
+const Sequelize = require('sequelize');
 const {getRolUserAndUsername} = require('./loginOut_Controller.js');
 
 const crear_ticket= async(req,res) =>{
@@ -123,9 +124,124 @@ const listar_usTicket = async (req, res) => {
 
 });
 }
+const Listar_Tecticket = async (req, res) => {
+    const { rolUser, username } = getRolUserAndUsername();
+    const user= username;
+    const TECtickets = await TicketModel.findAll({ where: { tecnico: user } });
+    res.render('Listar_Tecticket',
+    {TECtickets,
+    title:'Listado de Tickets',
+    rol: rolUser,
+    name: username
+
+});
+}
+const asignar= async(req,res) =>{
+    const { rolUser, username } = getRolUserAndUsername();
+    const req_id=req.params.id;
+    const usuarios = await usuarioModel.findAll({
+        where:{
+            tipo_usuario:"Tecnico"
+        }
+    }); 
+    const asig = await TicketModel.findAll({
+        where:{
+            id:req_id
+        }
+    });
+
+        res.render('asignar',
+        { 
+            title:"Asignar Tecnico",
+            rol: rolUser,
+            name: username,
+            usuarios:usuarios,
+            asig:asig
+
+        })
+    }
+
+    const asignado = async (req, res) => {
+        try {
+            const { id, tecnico } = req.body;
+    
+            // Verificar si el usuario tiene permisos adecuados para realizar la actualización
+            // Esto puede incluir alguna lógica de autenticación y autorización
+    
+            // Realizar la actualización en la base de datos
+            await TicketModel.update(
+                // Los datos que se van a actualizar
+                { tecnico}, 
+                // Opciones de búsqueda
+                { 
+                    where: { id: id } // Aquí se especifica qué registro debe ser actualizado
+                }
+            );
+    
+            
+    
+        } catch (error) {
+            console.error('Error al actualizar usuario:', error);
+            return res.status(500).json({ error: 'Error interno del servidor' });
+        }
+    };
+
+
+    const finalizar = async (req, res) => {
+        const { rolUser, username } = getRolUserAndUsername();
+        const req_id=req.params.id;
+        const asig = await TicketModel.findAll({
+            where:{
+                id:req_id
+            }
+        });
+    
+            res.render('finalizar',
+            { 
+                title:"Finalizar Ticket",
+                rol: rolUser,
+                name: username,
+                asig:asig
+    
+            })
+    };
+
+
+    const finalizado = async (req, res) => {
+        try {
+            const { id, status } = req.body;
+    
+            // Verificar si el usuario tiene permisos adecuados para realizar la actualización
+            // Esto puede incluir alguna lógica de autenticación y autorización
+    
+            // Realizar la actualización en la base de datos
+            await TicketModel.update(
+                // Los datos que se van a actualizar
+                { status,
+                    fecha_cierre: Sequelize.literal('CURRENT_TIMESTAMP')
+                }, 
+                // Opciones de búsqueda
+                { 
+                    where: { id: id } // Aquí se especifica qué registro debe ser actualizado
+                }
+            );
+    
+            
+    
+        } catch (error) {
+            console.error('Error al actualizar usuario:', error);
+            return res.status(500).json({ error: 'Error interno del servidor' });
+        }
+    };
+
 module.exports={
     crear_ticket,
     ticketAlt,
     Listar_ticket,
-    listar_usTicket
+    listar_usTicket,
+    Listar_Tecticket,
+    asignar,
+    asignado,
+    finalizar,
+    finalizado
 }

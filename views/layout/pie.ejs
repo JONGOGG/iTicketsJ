@@ -35,7 +35,6 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
     function eliminar(id){
         Swal.fire({
@@ -166,6 +165,104 @@ var regex = /^[a-zA-Z\s]+$/;
 }
 
 </script>
+
+
+<script>
+function asignar()
+{
+    var valor = document.getElementById("tecnico").value;
+    Swal.fire({
+        title: '¿Quieres Asignar el Ticket a: ' + valor + '?',
+        text: "Si Asignas este ticket no podrás revertir la acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Asignar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById("miFormulario").submit();
+            Swal.fire({
+                title: "Asignado!",
+                text: "El Ticket ha sido asignado.",
+                icon: "success",
+                showConfirmButton: false,
+            });
+            setTimeout(function () {
+                window.location = '/Listar_ticket';
+            }, 1000);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Si el usuario presiona "Cancelar", redirigir a la ruta deseada
+            window.location = '/Listar_ticket';
+        }
+    })
+}
+
+
+function finalizar()
+{
+    var valor = document.getElementById("status").value;
+    Swal.fire({
+        title: '¿Quieres Cambiar el estado el Ticket a: ' + valor + '?',
+        text: "Si Cambias el estado no podrás revertir la acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Cambiar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById("miFormulario").submit();
+            Swal.fire({
+                title: "Realizado!",
+                text: "El Estado ha sido Cambiado.",
+                icon: "success",
+                showConfirmButton: false,
+            });
+            setTimeout(function () {
+                window.location = '/Listar_ticket';
+            }, 1000);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Si el usuario presiona "Cancelar", redirigir a la ruta deseada
+            window.location = '/Listar_ticket';
+        }
+    })
+}
+
+function finalizarTec()
+{
+    var valor = document.getElementById("status").value;
+    Swal.fire({
+        title: '¿Quieres Cambiar el estado el Ticket a: ' + valor + '?',
+        text: "Si Cambias el estado no podrás revertir la acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Cambiar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById("miFormulario").submit();
+            Swal.fire({
+                title: "Realizado!",
+                text: "El Estado ha sido Cambiado.",
+                icon: "success",
+                showConfirmButton: false,
+            });
+            setTimeout(function () {
+                window.location = '/Listar_Tecticket';
+            }, 1000);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Si el usuario presiona "Cancelar", redirigir a la ruta deseada
+            window.location = '/Listar_Tecticket';
+        }
+    })
+}
+</script>
+
 
 <% if (typeof alertMessage !== 'undefined') { %>
   <script>

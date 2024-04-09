@@ -1,0 +1,36 @@
+<%- include('./layout/navBars') -%>
+
+
+<!-- Form content -->
+
+<div class="bg-light border rounded-3 ">
+  <div class="container align-items-center ">
+
+    <div class="row justify-content-center">
+  <h1 class="text-center ">Finalizar Ticket</h1>
+  <div class="col-lg-8 col-md-10 col-sm-12">
+    <form method="POST" action="/finalizar" id="miFormulario">
+      <div class="form-group">
+        <% asig.forEach(function(as) { %>
+            <input type="text" class="form-control" id="id" name="id" value="<%= as.id %>" required hidden>
+            <label for="estado">Estado Actual:</label>
+        <input type="text" value="<%= as.status %>" class="form-control" id="estado" name="estado" required readonly>
+        <% }); %>
+        
+<br>
+
+        <label for="status">Cambiar estado a:</label>
+        <input type="text" value="Finalizado" class="form-control" id="status" name="status" required readonly>
+        
+      </div>
+      
+    <br>
+      <div class="form-group text-center mt-2">
+        <%- include('./layout/fin') -%>
+    </div>
+    </form><br>
+  </div><br>
+</div>   
+ </div>
+ </div>  
+<%- include('./layout/pie')-%>

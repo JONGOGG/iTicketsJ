@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
         <title><%= title%></title>
         </head>
@@ -13,7 +13,7 @@
           <nav class="navbar navbar-expand-lg bg-primary text-light">
             <!-- Nav content -->
             <div class="container-fluid  ">
-                <a class="navbar-brand text-light ms-2" href="#"><img src="./assets/logoSystem.png"  width="80" alt="" srcset=""></a>
+                <a class="navbar-brand text-light ms-2" href="#"><img src="../assets/logoSystem.png"  width="80" alt="" srcset=""></a>
                   
                 <a class="navbar-brand navbar-nav nav-item text-light ps-lg-1 ps-5 ms-lg-1 ms-4 mb-1 mb-lg-0" href="#"><i class="fa-solid fa-circle-user fa-xl ms-2 ps-3 mt-2 mt-lg-3"></i> <h4 class="text-ligh ms-4 mt-sm-2 mt-lg-1 mt-3"> <%= name%></h4></a>
                
@@ -45,18 +45,18 @@
                  
                     <li class="nav-item mt-4">
                         <a href="/crear_ticket" class="nav-link px-2 text-light">
-                            <img class="fs-5 pb-1" src="./assets/icons/newticket.png"  width="30" alt="" srcset="">
+                            <img class="fs-5 pb-1" src="../assets/icons/newticket.png"  width="30" alt="" srcset="">
                             <h6 class="d-none d-sm-inline ms-2">Nuevo Ticket</h6>
                         </a>
                     </li>
                     <li class="nav-item mt-4">
-                        <a href="Listar_ticket" class="nav-link px-1 text-light">
-                            <img class="fs-5 pb-1" src="./assets/icons/ticket.png"  width="35" alt="" srcset="">
+                        <a href="/Listar_TECticket" class="nav-link px-1 text-light">
+                            <img class="fs-5 pb-1" src="../assets/icons/ticket.png"  width="35" alt="" srcset="">
                             <h6 class="d-none d-sm-inline ms-2">Consultar Tickets</h6>
                         </a>
                     </li>
                     <li class="nav-item  mt-4">
-                        <a href="usuarios" class="nav-link px-2 text-light"><i class="fa-solid fa-users fa-xl"></i>
+                        <a href="/usuarios" class="nav-link px-2 text-light"><i class="fa-solid fa-users fa-xl"></i>
                             <h6 class="d-none d-sm-inline ms-2">Usuarios</h6>
                         </a>
                     </li>
@@ -65,5 +65,5 @@
                 </ul>
             </div>
             </aside>
-            <main class="col overflow-auto h-80 ms-5 me-5"> <!-- Adjusted classes -->
+            <main class="col overflow-auto h-80 ms-lg-5 me-lg-5"> <!-- Adjusted classes -->
         

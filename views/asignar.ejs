@@ -1,0 +1,40 @@
+<%- include('./layout/navBars') -%>
+
+
+<!-- Form content -->
+
+<div class="bg-light border rounded-3 ">
+  <div class="container align-items-center ">
+
+    <div class="row justify-content-center">
+  <h1 class="text-center ">Asignar</h1>
+  <div class="col-lg-8 col-md-10 col-sm-12">
+    <form method="POST" action="/asignar" id="miFormulario">
+      <div class="form-group">
+        <% asig.forEach(function(as) { %>
+            <input type="text" class="form-control" id="id" name="id" value="<%= as.id %>" required hidden>
+            <label for="Tecnico_anterior">Tecnico Asignado:</label>
+        <input type="text" value="<%= as.tecnico %>" class="form-control" id="Nombre" name="Nombre" required readonly>
+        <% }); %>
+        
+<br>
+
+        <label for="tecnico">Tecnico a Asignar:</label>
+        <select class="form-select" name="tecnico" id="tecnico" required>
+            <option selected>-- Seleccione un Tecnico --</option>
+            <% usuarios.forEach(function(user) { %>
+            <option value="<%= user.user %>"><%= user.user %></option>
+    <% }); %>
+    </select>
+      </div>
+      
+    <br>
+      <div class="form-group text-center mt-2">
+      <button type="button" id="btnEnviar" class="btn btn-info btn-block me-auto ms-auto" onclick="asignar()" >Asignar</button>
+    </div>
+    </form><br>
+  </div><br>
+</div>   
+ </div>
+ </div>  
+<%- include('./layout/pie')-%>

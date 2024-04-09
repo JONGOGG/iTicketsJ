@@ -14,12 +14,14 @@
               <th scope="col">ASUNTO</th>
               <th scope="col">DESCRIPCIÓN</th>
               <th scope="col">ESTATUS</th>
+              <th scope="col">TECNICO ASIGNADO</th>
               <th scope="col">FECHA DE EXPEDICIÓN</th>
               <th scope="col">FECHA DE CIERRE</th>
+              <th scope="col">ACCIONES</th>
             </tr>
           </thead>
         <tbody>
-          <% UStickets.forEach(function(ticket) { %>
+          <% TECtickets.forEach(function(ticket) { %>
             <tr>
               <td><%= ticket.id %></td>
               <td><%= ticket.usuario %></td>
@@ -27,8 +29,12 @@
               <td><%= ticket.asunto %></td>
               <td><%= ticket.descripcion %></td>
               <td><%= ticket.status %></td>
+              <td><%= ticket.tecnico %></td>
               <td><%= ticket.fecha_expedido %></td>
               <td><%= ticket.fecha_cierre %></td>
+              <td>
+                <a href="/finalizar/<%= ticket.id %>" class="btn btn-outline-danger">Finalizar</a>
+              </td>
             </tr>
           <% }); %>
         </tbody>
