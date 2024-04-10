@@ -27,7 +27,7 @@ const authMiddleware = (req, res, next) => {
             title: "Advertencia",
             alertMessag: "No hay una sesión iniciada",
             icon: "warning",
-            ruta:'login'
+            ruta:'/'
         });
         
     }
@@ -38,7 +38,7 @@ const authMiddleware = (req, res, next) => {
                 title: "Advertencia",
                 alertMessage: "No tienes permisos para entrar a esta ruta",
                 icon: "warning",
-                ruta: "login"
+                ruta: "/"
             });
         }
 

@@ -75,7 +75,7 @@ const logout = (req, res) => {
     // Borrar la cookie de autenticación
     res.clearCookie('token');
     // Redirigir al usuario al inicio de sesión
-    res.redirect('/login');
+    res.redirect('/');
 };
 
 const getRolUserAndUsername = () => {
